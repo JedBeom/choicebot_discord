@@ -14,7 +14,7 @@ import (
 
 var (
 	token   string
-	version = "0.1.0"
+	version = "0.1.1"
 
 	embed          discordgo.MessageEmbed
 	versionMessage discordgo.MessageEmbed

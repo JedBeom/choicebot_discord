@@ -58,7 +58,7 @@ func init() {
 		Footer: &footer,
 
 		Title: "버전 목록",
-		URL:   "https://github.com/JedBeom/blob/master/versions.md",
+		URL:   "https://github.com/JedBeom/choicebot_discord/blob/master/versions.md",
 
 		Description: "현재 버전은 **v" + version + "**이에요!",
 	}

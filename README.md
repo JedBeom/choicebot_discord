@@ -1,12 +1,8 @@
 # Choicebot
 
-디스코드용 선택봇입니다. Go 빌드하여 쓰십시오.
+```go
+go get -u github.com/JedBeom/choicebot_discord
+go install github.com/JedBeom/choicebot_discord
+choicebot_discord -t [bot_token]
+```
 
-디스코드 내 사용법:
-```
-!선택 A vs B vs C
-```
-또는
-```
-!선택 A B C
-```

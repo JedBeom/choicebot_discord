@@ -17,7 +17,7 @@ import (
 
 var (
 	token   string
-	version = "18.11.17.4"
+	version = "18.11.17.5"
 	embed   discordgo.MessageEmbed
 )
 
@@ -32,10 +32,13 @@ func init() {
 		os.Exit(1) // 프로그램 종료
 	}
 
-	// 맨 아래의 정보
-	footer := discordgo.MessageEmbedFooter{
-		Text:    "© Bombwhale | v" + version,
-		IconURL: "https://avatars2.githubusercontent.com/u/20675630?s=460&v=4",
+}
+
+func init() {
+	// 맨 위
+	author := discordgo.MessageEmbedAuthor{
+		Name:    "하코자키 세리카",
+		IconURL: "https://raw.githubusercontent.com/JedBeom/choicebot_discord/master/serika.png",
 	}
 
 	// 중간의 제목 - 내용들
@@ -43,31 +46,33 @@ func init() {
 
 	fields = append(fields, &discordgo.MessageEmbedField{
 		Name:  "!선택",
-		Value: "`!선택 A B` 또는 `!선택 A eats vs B dances`\n항목 중 하나를 선택해요!",
+		Value: "**!선택 A B** 또는 **!선택 밀리 애니 ㄷ 월희 리메이크** 또는 **!선택 A eats vs B dances**\n항목 중 하나를 선택해요!",
 	}, &discordgo.MessageEmbedField{
 		Name:  "!주사위",
-		Value: "`!주사위 a-b`\n0을 포함한 자연수 a부터 b가지의 수 중 하나를 무작위로 뽑아요!",
+		Value: "**!주사위 a-b**\n0을 포함한 자연수 a부터 b가지의 수 중 하나를 무작위로 뽑아요!",
 	}, &discordgo.MessageEmbedField{
 		Name:  "!업다운",
-		Value: "`!업다운 시작`으로 업다운 게임을 시작할 수 있어요.\n숫자는 1-100의 정수이며, `!업다운 23`으로 게임을 진행할 수 있어요.",
+		Value: "**!업다운 시작**으로 업다운 게임을 시작할 수 있어요.\n숫자는 1-100의 정수이며, **!업다운 23**으로 게임을 진행할 수 있어요.",
 	})
 
-	// 맨 위
-	author := discordgo.MessageEmbedAuthor{
-		Name:    "하코자키 세리카",
-		IconURL: "https://raw.githubusercontent.com/JedBeom/choicebot_discord/master/serika.png",
+	// 맨 아래의 정보
+	footer := discordgo.MessageEmbedFooter{
+		Text:    "© Bombwhale | v" + version,
+		IconURL: "https://avatars2.githubusercontent.com/u/20675630?s=460&v=4",
 	}
 
 	embed = discordgo.MessageEmbed{
+		Color:  0xed90ba,
 		Author: &author,
 
 		Title:       "세리카 봇",
 		Description: "아래의 행동을 할 수 있어요!",
+		URL:         "https://github.com/JedBeom/choicebot_discord",
 
-		Color:     0xed90ba,
-		Timestamp: time.Now().Format(time.RFC3339),
-		Fields:    fields,
+		Fields: fields,
+
 		Footer:    &footer,
+		Timestamp: time.Now().Format(time.RFC3339),
 	}
 }
 
@@ -128,6 +133,15 @@ func choice(s *discordgo.Session, m *discordgo.MessageCreate) {
 		// 그 숫자를 인덱스 번호로 넣어 값을 받아옴
 		truth := options[rand.Intn(len(options))]
 
+		reply(s, m, truth)
+
+	} else if strings.Contains(content, " ㄷ ") {
+		options := strings.Split(content, " ㄷ ")
+		if len(options) < 2 {
+			return
+		}
+
+		truth := options[rand.Intn(len(options))]
 		reply(s, m, truth)
 
 	} else {

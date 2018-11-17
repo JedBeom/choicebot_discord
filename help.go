@@ -1,8 +1,6 @@
 package main
 
 import (
-	"time"
-
 	"github.com/bwmarrin/discordgo"
 )
 
@@ -25,7 +23,14 @@ func init() {
 	}, &discordgo.MessageEmbedField{
 		Name:  "!업다운",
 		Value: "**!업다운 시작**으로 업다운 게임을 시작할 수 있어요.\n숫자는 1-100의 정수이며, **!업다운 23**으로 게임을 진행할 수 있어요.",
+	}, &discordgo.MessageEmbedField{
+		Name:  "!세리카 버전",
+		Value: "버전을 보여줘요.",
 	})
+
+	thumbnail := discordgo.MessageEmbedThumbnail{
+		URL: "https://raw.githubusercontent.com/JedBeom/choicebot_discord/master/serika.png",
+	}
 
 	// 맨 아래의 정보
 	footer := discordgo.MessageEmbedFooter{
@@ -37,13 +42,25 @@ func init() {
 		Color:  0xed90ba,
 		Author: &author,
 
-		Title:       "세리카 봇",
-		Description: "아래의 행동을 할 수 있어요!",
+		Title:       "Github 레포",
 		URL:         "https://github.com/JedBeom/choicebot_discord",
+		Description: "아래의 행동을 할 수 있어요!",
 
-		Fields: fields,
+		Fields:    fields,
+		Thumbnail: &thumbnail,
 
-		Footer:    &footer,
-		Timestamp: time.Now().Format(time.RFC3339),
+		Footer: &footer,
 	}
+
+	versionMessage = discordgo.MessageEmbed{
+		Color:  0xed90ba,
+		Author: &author,
+		Footer: &footer,
+
+		Title: "버전 목록",
+		URL:   "https://github.com/JedBeom/blob/master/versions.md",
+
+		Description: "현재 버전은 **v" + version + "**이에요!",
+	}
+
 }

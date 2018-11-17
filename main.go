@@ -7,14 +7,17 @@ import (
 	"os/signal"
 	"strings"
 	"syscall"
+	"time"
 
 	"github.com/bwmarrin/discordgo"
 )
 
 var (
 	token   string
-	version = "18.11.17.6"
-	embed   discordgo.MessageEmbed
+	version = "0.1.0"
+
+	embed          discordgo.MessageEmbed
+	versionMessage discordgo.MessageEmbed
 )
 
 // 초기화
@@ -76,9 +79,20 @@ func vote(s *discordgo.Session, m *discordgo.MessageCreate) {
 // Prefix에 맞춰 함수 실행
 func handler(s *discordgo.Session, m *discordgo.MessageCreate) {
 	if m.Content == "!세리카" {
+
+		embed.Timestamp = time.Now().Format(time.RFC3339)
+		message := discordgo.MessageSend{
+			Content: "<@" + m.Author.ID + ">님을 위한 도움말!",
+			Embed:   &embed,
+		}
+		s.ChannelMessageSendComplex(m.ChannelID, &message)
+
+	} else if m.Content == "!세리카 버전" {
+		versionMessage.Timestamp = time.Now().Format(time.RFC3339)
+
 		message := discordgo.MessageSend{
 			Content: "<@" + m.Author.ID + ">",
-			Embed:   &embed,
+			Embed:   &versionMessage,
 		}
 
 		s.ChannelMessageSendComplex(m.ChannelID, &message)

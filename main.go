@@ -17,7 +17,7 @@ import (
 
 var (
 	token   string
-	version = "18.11.17.2"
+	version = "18.11.17.4"
 	embed   discordgo.MessageEmbed
 )
 
@@ -262,10 +262,8 @@ func vote(s *discordgo.Session, m *discordgo.MessageCreate) {
 // Prefix에 맞춰 함수 실행
 func handler(s *discordgo.Session, m *discordgo.MessageCreate) {
 	if m.Content == "!세리카" {
-		_, err := s.ChannelMessageSendEmbed(m.ChannelID, &embed)
-		if err != nil {
-			log.Println(err)
-		}
+		reply(s, m, "잠시만 기다리세요...")
+		s.ChannelMessageSendEmbed(m.ChannelID, &embed)
 	} else if strings.HasPrefix(m.Content, "!선택 ") {
 		choice(s, m)
 	} else if strings.HasPrefix(m.Content, "!주사위 ") {

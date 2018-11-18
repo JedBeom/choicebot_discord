@@ -18,13 +18,13 @@ func init() {
 
 	fields = append(fields, &disgo.MessageEmbedField{
 		Name:  "!선택",
-		Value: "**!선택 A eats vs B dances** 또는 **!선택 A B** 또는 **!선택 밀리 애니 ㄷ 월희 리메이크**\n항목 중 하나를 선택해요!",
+		Value: "`!선택 A eats vs B dances` 또는 `!선택 A B` 또는 `!선택 밀리 애니 ㄷ 월희 리메이크`\n항목 중 하나를 선택해요!",
 	}, &disgo.MessageEmbedField{
 		Name:  "!주사위",
-		Value: "**!주사위 a-b**\n0을 포함한 자연수 a부터 b가지의 수 중 하나를 무작위로 뽑아요!",
+		Value: "`!주사위 a-b`\n0을 포함한 자연수 a부터 b까지의 수 중 하나를 무작위로 뽑아요!",
 	}, &disgo.MessageEmbedField{
 		Name:  "!업다운",
-		Value: "**!업다운 시작**으로 업다운 게임을 시작할 수 있어요.\n숫자는 1-100의 정수이며, **!업다운 23**으로 게임을 진행할 수 있어요.",
+		Value: "`!업다운 시작`으로 업다운 게임을 시작할 수 있어요.\n숫자는 1-100의 정수이며, `!업다운 23`으로 게임을 진행할 수 있어요.\n그만하려면 `!업다운 그만`을 써주세요.",
 	}, &disgo.MessageEmbedField{
 		Name:  "!세리카 버전",
 		Value: "버전을 보여줘요.",
@@ -81,7 +81,7 @@ func init() {
 			Inline: true,
 		},
 		&disgo.MessageEmbedField{
-			Name:   "**!선택** 명령어 구분자 우선 순위",
+			Name:   "`!선택` 명령어 구분자 우선 순위",
 			Value:  "' vs ', ' ㄷ ', ' ' 순",
 			Inline: true,
 		},

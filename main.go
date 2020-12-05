@@ -31,7 +31,6 @@ func init() {
 	// 만일 토큰이 안 들어 왔을 때
 	if token == "" {
 		log.Fatal("USAGE: -t [token]")
-		os.Exit(1) // 프로그램 종료
 	}
 
 }
@@ -105,9 +104,11 @@ func handler(s *discordgo.Session, m *discordgo.MessageCreate) {
 	} else if strings.HasPrefix(m.Content, "!업다운 ") {
 		updown(s, m)
 	} else if strings.HasPrefix(m.Content, "!투표") {
-
 		vote(s, m)
-
+	} else if m.Content == "!역할놀이" {
+		roleStart(s, m)
+	} else if m.Content == "!역할놀이 시작" {
+		roleMix(s, m)
 	}
 	// 해당하는 것이 없으면 아예 반응을 안함
 }

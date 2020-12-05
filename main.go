@@ -54,7 +54,8 @@ func main() {
 
 	log.Println("Bot is now running. Press CTRL-C to exit")
 	// 디스코드 내에서 플레이 중인 게임 이름 지정
-	dg.UpdateStatus(0, "도움말: !세리카")
+	// dg.UpdateStatus(0, "도움말: !세리카")
+	dg.UpdateListeningStatus("!세리카")
 
 	// C-c 들어오면
 	sc := make(chan os.Signal, 1)
@@ -82,6 +83,10 @@ func vote(s *discordgo.Session, m *discordgo.MessageCreate) {
 
 // Prefix에 맞춰 함수 실행
 func handler(s *discordgo.Session, m *discordgo.MessageCreate) {
+	if len(m.Content) <= 1 || m.Content[0] != []byte("!")[0] {
+		return
+	}
+
 	if m.Content == "!세리카" {
 		sendHelp(s, m)
 	} else if m.Content == "!세리카 버전" {

@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	disgo "github.com/bwmarrin/discordgo"
 	"log"
 	"math/rand"
@@ -64,17 +65,17 @@ func roleMix(s *disgo.Session, m *disgo.MessageCreate) {
 		nicks[i], nicks[j] = nicks[j], nicks[i]
 	})
 
-	// result := "@here **닉네임 변경 결과!**"
+	result := "@here **닉네임 변경 결과!**"
 
 	for i := range users {
 		err := s.GuildMemberNickname(m.GuildID, users[i].ID, nicks[i])
 		if err != nil {
 			log.Println(err)
 		}
-		// result += fmt.Sprintf("\n%s: %s", users[i].Username, nicks[i])
+		result += fmt.Sprintf("\n%s → %s", users[i].Username, nicks[i])
 	}
 
-	_, err = s.ChannelMessageSend(m.ChannelID, "@here 이제 혼란스러운 역할놀이를 시작하세요!")
+	_, err = s.ChannelMessageSend(m.ChannelID, result+"\n\n**이제 혼란스러운 역할놀이를 시작하세요!")
 	if err != nil {
 		log.Println(err)
 	}
